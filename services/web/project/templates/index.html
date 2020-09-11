@@ -1,0 +1,91 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="Basic template to test some apis">
+      <meta name="author" content="Felipe Lopez">
+      <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#129504;</text></svg>">
+
+
+      <title>Routine by felipon</title>
+
+      <!-- Bootstrap core CSS -->
+      <link href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Custom styles for this template -->
+      <link href="http://v4-alpha.getbootstrap.com/examples/cover/cover.css" rel="stylesheet">
+
+      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <script src="http://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+    </head>
+
+    <body>
+
+      <div class="site-wrapper">
+
+        <div class="site-wrapper-inner">
+
+          <div class="cover-container">
+
+            <div class="masthead clearfix">
+              <div class="inner">
+                <h3 class="masthead-brand">Routine</h3>
+                <nav class="nav nav-masthead">
+                  <a class="nav-link active" id="home_link" href="{{ url_for('index') }}">Home</a>
+                  <a class="nav-link" id ="self_doubt" href="#">Self doubt</a>
+                  <a class="nav-link" href='{{url_for("contact")}}'>Contacto</a>
+                </nav>
+              </div>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+              Your message was sent, we will be in conntact with you shortly
+            </div>
+            {% endfor %}
+        {% endif %}
+      {% endwith %}
+            </div>
+
+            <div class="inner cover" id="cover">
+              <h1 class="cover-heading">Today I learned.</h1>
+              <div class="spinner-border text-success" id="quote" role="status">
+                  <span class="sr-only">Loading...</span>
+              </div>
+              <p class="lead">
+                <a href="#" class="btn btn-lg btn-success" id ="btn_next">Get New One</a>
+                <a href="#" class="btn btn-lg btn-info" id="btn_learn">Learn more</a>
+              </p>
+            </div>
+
+            <div class="mastfoot">
+              <div class="inner">
+                <p><a href="mailto:felipe@nogson.com" target="_blank">felipe@nogson.com</a></p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Bootstrap core JavaScript
+      ================================================== -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script> 
+
+      <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+      <script>window.jQuery || document.write('<script src="http://v4-alpha.getbootstrap.com/assets/js/vendor/jquery.min.js"><\/script>')</script>
+      <script src="http://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js"></script>
+      <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+      <script src="http://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+      <script charset="utf-8" src="{{  url_for('static', filename='main.js')}}">
+      </script>
+
+    </body>
+  </html>
+  
