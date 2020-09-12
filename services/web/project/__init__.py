@@ -6,15 +6,14 @@ from flask import Flask, jsonify, send_from_directory, request, redirect, url_fo
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from flask_mail import Mail, Message
-# Este es la funcion que conecta al api de reddit
-from r_help import til_random, affirmations
+
 
 app = Flask(__name__)
 app.config.from_object("project.config.Config")
 mail = Mail(app)
 db = SQLAlchemy(app)
 CORS(app)
-
+from project.blueprints.routine import routine
 
 if __name__ != '__main__':
     gunicorn_logger = logging.getLogger('gunicorn.error')
@@ -33,45 +32,19 @@ class User(db.Model):
         self.email = email
 
 
+app.register_blueprint(routine, url_prefix='/routine')
+
+
 @app.route("/")
 def index():
-    """ Default route """
+    return redirect(url_for('routine.index'))
+#    """ Default route """
 #    app.logger.debug('this is a DEBUG message')
 #    app.logger.info('this is a INFO  message')
 #    app.logger.warning('this is a WARNING message')
 #    app.logger.error('this is a ERROR message')
 #    app.logger.critical('this is a CRITICAL message')
-    return render_template('index.html', name="Home")
-
-
-@app.route("/contact", methods=['GET', 'POST'])
-def contact():
-    """TODO: Docstring for contact.
-    :returns: Serves contact page
-
-    """
-    if request.method == "POST":
-        app.logger.warning(request.form['email'])
-        msg = Message("Este es un mensaje desde RUTINA by felipon", sender='services@nogson.com', recipients=['felipe@nogson.com'])
-        msg.body = f'{request.form["email"]} : {request.form["message"]} '
-        flash('Message Sended')
-        mail.send(msg)
-        return redirect(url_for('index'))
-    return render_template('contact.html', name="Contact")
-
-
-@app.route("/til")
-def til():
-    quote = til_random()
-    return jsonify(quote)
-
-
-@app.route("/affirmations")
-def affirmation():
-    """ Un api para la aplicacion le mandamos una afirmacion.
-    :returns:
-    """
-    return jsonify(affirmations())
+#    return render_template('index.html', name="Home")
 
 
 @app.route("/static/<path:filename>")

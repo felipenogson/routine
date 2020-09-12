@@ -20,7 +20,7 @@ RUN apt-get install -y --no-install-recommends g++ libpq5
 RUN pip install --upgrade pip
 RUN pip install flake8
 COPY . /usr/src/app/
-RUN flake8 --ignore=E501,F401 --exclude env .
+RUN flake8 --ignore=E501,F401,E402 --exclude env .
 
 COPY ./requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
